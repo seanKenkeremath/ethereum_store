@@ -70,6 +70,17 @@ contract EthereumStore {
         items[itemId].stock = newStock;
     }
     
+    function updateItemPrice(uint itemId, uint newPrice) public {
+        if (msg.sender != storeOwner) {
+            //Only owner can update price
+            return;
+        }
+        if (newPrice < 0) {
+            return;
+        }
+        items[itemId].price = newPrice;
+    }
+    
     //TODO: Optimize?
     function getForSaleItemIds() constant public returns (uint[]) {
         //first count
